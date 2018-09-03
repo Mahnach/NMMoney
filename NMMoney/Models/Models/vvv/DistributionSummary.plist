@@ -1,0 +1,176 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE plist PUBLIC "-//Apple//DTD PLIST 1.0//EN" "http://www.apple.com/DTDs/PropertyList-1.0.dtd">
+<plist version="1.0">
+<dict>
+	<key>NMMoney.ipa</key>
+	<array>
+		<dict>
+			<key>architectures</key>
+			<array>
+				<string>arm64</string>
+			</array>
+			<key>certificate</key>
+			<dict>
+				<key>SHA1</key>
+				<string>EA9793980A16E9C005456164396905198242A580</string>
+				<key>dateExpires</key>
+				<string>01.09.2019</string>
+				<key>type</key>
+				<string>iOS Development</string>
+			</dict>
+			<key>embeddedBinaries</key>
+			<array>
+				<dict>
+					<key>architectures</key>
+					<array>
+						<string>arm64</string>
+					</array>
+					<key>certificate</key>
+					<dict>
+						<key>SHA1</key>
+						<string>EA9793980A16E9C005456164396905198242A580</string>
+						<key>dateExpires</key>
+						<string>01.09.2019</string>
+						<key>type</key>
+						<string>iOS Development</string>
+					</dict>
+					<key>name</key>
+					<string>Alamofire.framework</string>
+					<key>team</key>
+					<dict>
+						<key>id</key>
+						<string>5MP465T3YD</string>
+						<key>name</key>
+						<string>National Financial Advisors pty ltd</string>
+					</dict>
+				</dict>
+				<dict>
+					<key>architectures</key>
+					<array>
+						<string>arm64</string>
+					</array>
+					<key>certificate</key>
+					<dict>
+						<key>SHA1</key>
+						<string>EA9793980A16E9C005456164396905198242A580</string>
+						<key>dateExpires</key>
+						<string>01.09.2019</string>
+						<key>type</key>
+						<string>iOS Development</string>
+					</dict>
+					<key>name</key>
+					<string>DropDown.framework</string>
+					<key>team</key>
+					<dict>
+						<key>id</key>
+						<string>5MP465T3YD</string>
+						<key>name</key>
+						<string>National Financial Advisors pty ltd</string>
+					</dict>
+				</dict>
+				<dict>
+					<key>architectures</key>
+					<array>
+						<string>arm64</string>
+					</array>
+					<key>certificate</key>
+					<dict>
+						<key>SHA1</key>
+						<string>EA9793980A16E9C005456164396905198242A580</string>
+						<key>dateExpires</key>
+						<string>01.09.2019</string>
+						<key>type</key>
+						<string>iOS Development</string>
+					</dict>
+					<key>name</key>
+					<string>Realm.framework</string>
+					<key>team</key>
+					<dict>
+						<key>id</key>
+						<string>5MP465T3YD</string>
+						<key>name</key>
+						<string>National Financial Advisors pty ltd</string>
+					</dict>
+				</dict>
+				<dict>
+					<key>architectures</key>
+					<array>
+						<string>arm64</string>
+					</array>
+					<key>certificate</key>
+					<dict>
+						<key>SHA1</key>
+						<string>EA9793980A16E9C005456164396905198242A580</string>
+						<key>dateExpires</key>
+						<string>01.09.2019</string>
+						<key>type</key>
+						<string>iOS Development</string>
+					</dict>
+					<key>name</key>
+					<string>RealmSwift.framework</string>
+					<key>team</key>
+					<dict>
+						<key>id</key>
+						<string>5MP465T3YD</string>
+						<key>name</key>
+						<string>National Financial Advisors pty ltd</string>
+					</dict>
+				</dict>
+				<dict>
+					<key>architectures</key>
+					<array>
+						<string>arm64</string>
+					</array>
+					<key>certificate</key>
+					<dict>
+						<key>SHA1</key>
+						<string>EA9793980A16E9C005456164396905198242A580</string>
+						<key>dateExpires</key>
+						<string>01.09.2019</string>
+						<key>type</key>
+						<string>iOS Development</string>
+					</dict>
+					<key>name</key>
+					<string>UICheckbox_Swift.framework</string>
+					<key>team</key>
+					<dict>
+						<key>id</key>
+						<string>5MP465T3YD</string>
+						<key>name</key>
+						<string>National Financial Advisors pty ltd</string>
+					</dict>
+				</dict>
+			</array>
+			<key>entitlements</key>
+			<dict>
+				<key>application-identifier</key>
+				<string>5MP465T3YD.com.vertigo.NMMoney</string>
+				<key>com.apple.developer.team-identifier</key>
+				<string>5MP465T3YD</string>
+				<key>get-task-allow</key>
+				<true/>
+				<key>keychain-access-groups</key>
+				<array>
+					<string>5MP465T3YD.com.vertigo.NMMoney</string>
+				</array>
+			</dict>
+			<key>name</key>
+			<string>NMMoney.app</string>
+			<key>profile</key>
+			<dict>
+				<key>UUID</key>
+				<string>413e509e-24a2-45a5-a95d-ee33bf79764e</string>
+				<key>name</key>
+				<string>iOS Team Provisioning Profile: com.vertigo.NMMoney</string>
+			</dict>
+			<key>team</key>
+			<dict>
+				<key>id</key>
+				<string>5MP465T3YD</string>
+				<key>name</key>
+				<string>National Financial Advisors pty ltd</string>
+			</dict>
+		</dict>
+	</array>
+</dict>
+</plist>

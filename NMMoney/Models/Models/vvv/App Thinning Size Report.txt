@@ -1,0 +1,22 @@
+
+App Thinning Size Report for All Variants of NMMoney
+
+Variant: NMMoney-iPad Air 2-etc.ipa
+Supported devices: iPad (5th generation), iPad (6th generation), iPad Air, iPad Air 2, iPad Pro (12.9-inch), iPad mini 2, iPad mini 3, and iPad mini 4
+App + On Demand Resources size: 5,1 MB compressed, 13,9 MB uncompressed
+App size: 5,1 MB compressed, 13,9 MB uncompressed
+On Demand Resources size: Zero KB compressed, Zero KB uncompressed
+
+
+Variant: NMMoney-iPad Pro (9.7-inch)-etc.ipa
+Supported devices: iPad Pro (10.5-inch), iPad Pro (12.9-inch) (2nd generation), and iPad Pro (9.7-inch)
+App + On Demand Resources size: 5,1 MB compressed, 13,9 MB uncompressed
+App size: 5,1 MB compressed, 13,9 MB uncompressed
+On Demand Resources size: Zero KB compressed, Zero KB uncompressed
+
+
+Variant: NMMoney.ipa
+Supported devices: Universal
+App + On Demand Resources size: 5,4 MB compressed, 14,3 MB uncompressed
+App size: 5,4 MB compressed, 14,3 MB uncompressed
+On Demand Resources size: Zero KB compressed, Zero KB uncompressed

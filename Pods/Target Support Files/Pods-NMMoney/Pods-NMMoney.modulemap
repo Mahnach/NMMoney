@@ -1,0 +1,6 @@
+framework module Pods_NMMoney {
+  umbrella header "Pods-NMMoney-umbrella.h"
+
+  export *
+  module * { export * }
+}

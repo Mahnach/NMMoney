@@ -1,0 +1,34 @@
+PODS:
+  - Alamofire (4.7.3)
+  - DropDown (2.3.2)
+  - Realm (3.7.6):
+    - Realm/Headers (= 3.7.6)
+  - Realm/Headers (3.7.6)
+  - RealmSwift (3.7.6):
+    - Realm (= 3.7.6)
+  - UICheckbox.Swift (1.0.0)
+
+DEPENDENCIES:
+  - Alamofire
+  - DropDown (~> 2.3)
+  - RealmSwift
+  - UICheckbox.Swift
+
+SPEC REPOS:
+  https://github.com/cocoapods/specs.git:
+    - Alamofire
+    - DropDown
+    - Realm
+    - RealmSwift
+    - UICheckbox.Swift
+
+SPEC CHECKSUMS:
+  Alamofire: c7287b6e5d7da964a70935e5db17046b7fde6568
+  DropDown: 7f87abecc28f9b4edad810fe1211c5c018c257e5
+  Realm: 9eaecad54712d6246d08ba34c10f354e4715d7d3
+  RealmSwift: 1fe08b4ebaeeaacf17f9ba0343f7b25c9fc31fa6
+  UICheckbox.Swift: 85715689206fac5bae38b308f19c2a3e00442c3b
+
+PODFILE CHECKSUM: 92df41737a687eab36e56c73abcb677fbf3ccb14
+
+COCOAPODS: 1.5.3
