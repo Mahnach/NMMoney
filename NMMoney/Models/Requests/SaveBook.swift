@@ -13,11 +13,11 @@ import RealmSwift
 class SaveBook{
     
     static func saveBook(completion: @escaping (Bool) -> Void) {
-       
+       // testing - http://apidev.nmmoneybookings.co.uk/bms/booking/save http://api.nmmoneybookings.co.uk/bms/booking/save
         let url = "http://api.nmmoneybookings.co.uk/bms/booking/save"
         
         let headers: HTTPHeaders = [
-            "Content-Type": "application/x-www-form-urlencoded",
+            "Content-Type": "application/json",
             "X-AuthToken": RealmService.getToken().last!.token!
         ]
 
@@ -32,15 +32,16 @@ class SaveBook{
             "Latitude" : RealmService.getAddress().last!.lat!,
             "Longitude" : RealmService.getAddress().last!.long!,
             "Location" : RealmService.getAddress().last!.address!,
-            "BookingType" : RealmService.getBook().last!.bookingType
+            "BookingType" : RealmService.getBook().last!.bookingType,
+            "Comment" : RealmService.getBook().last!.comment!
         ]
         print(parameters)
-        Alamofire.request(url, method: .post, parameters: parameters, encoding: URLEncoding.default, headers: headers)
+        Alamofire.request(url, method: .post, parameters: parameters, encoding: JSONEncoding.default, headers: headers)
             .validate()
             .responseJSON{ (response) in
-                print(response.result.value)
+                print(response)
                 if response.result.value != nil {
-                    print(response.result.value)
+                    //print(response.result.value)
                     completion(true)
                 }
                 completion(false)

@@ -17,6 +17,7 @@ class StartVC: UIViewController, CLLocationManagerDelegate {
     override func viewDidLoad() {
         super.viewDidLoad()
         setupUI()
+        RealmService.deleteBook()
         RealmService.deleteSlots()
         RealmService.deleteBranchTime()
         self.locationManager.requestAlwaysAuthorization()

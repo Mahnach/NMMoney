@@ -13,11 +13,12 @@ import RealmSwift
 class GetToken{
 
     static func getToken(completion: @escaping (Bool) -> Void) {
-        
+        // testing - http://apidev.nmmoneybookings.co.uk/login/
+        ///http://api.nmmoneybookings.co.uk/login/
         let url = "http://api.nmmoneybookings.co.uk/login/"
         
         let headers: HTTPHeaders = [
-            "Content-Type": "application/x-www-form-urlencoded"
+            "Content-Type": "application/json"
         ]
         
         let parameters: Parameters = [
@@ -25,7 +26,7 @@ class GetToken{
             "password": "P@ssw0rd!"
         ]
         
-        Alamofire.request(url, method: .post, parameters: parameters, encoding: URLEncoding.default, headers: headers)
+        Alamofire.request(url, method: .post, parameters: parameters, encoding: JSONEncoding.default, headers: headers)
             .validate()
             .responseJSON{ (response) in
                 print(response.result.value)

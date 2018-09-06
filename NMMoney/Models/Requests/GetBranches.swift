@@ -13,7 +13,8 @@ import RealmSwift
 class GetBranches{
     
     static func getBranches(completion: @escaping (Bool) -> Void) {
-        
+        // testing - http://apidev.nmmoneybookings.co.uk/bms/branch/list
+        //http://api.nmmoneybookings.co.uk/bms/branch/list
         let url = "http://api.nmmoneybookings.co.uk/bms/branch/list"
         
         let headers: HTTPHeaders = [
@@ -22,7 +23,7 @@ class GetBranches{
         ]
 
         
-        Alamofire.request(url, method: .get, encoding: URLEncoding.default, headers: headers)
+        Alamofire.request(url, method: .get, encoding: JSONEncoding.default, headers: headers)
             .validate()
             .responseJSON{ (response) in
                 print(response.result.value)

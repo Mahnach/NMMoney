@@ -22,4 +22,5 @@ class BookModel: Object {
     @objc dynamic var reason: String?
     @objc dynamic var branchName: String?
     @objc dynamic var bookingType = 0
+    @objc dynamic var comment: String?
 }

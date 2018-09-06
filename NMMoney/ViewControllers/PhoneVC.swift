@@ -31,6 +31,7 @@ class PhoneVC: UIViewController, UICollectionViewDelegate, UICollectionViewDataS
     @IBOutlet weak var checkBox: UIView!
     @IBOutlet weak var branchField: UITextField!
     @IBOutlet weak var booked: UIButton!
+    @IBOutlet weak var commentField: UITextField!
     
     let realm = try! Realm()
     var selectedBranch = ""
@@ -397,7 +398,12 @@ class PhoneVC: UIViewController, UICollectionViewDelegate, UICollectionViewDataS
             //bookInstance.branchId = branch.first!.id
             let splittedDate = dateLabel.text!.components(separatedBy: " ")
             let month = monthToNumber(monthString: splittedDate[2])
-            
+            var monthString = ""
+            if month < 10 {
+                monthString = "0" + String(describing: month)
+            } else {
+                monthString = String(describing: month)
+            }
             let timeString = timeLabel.text!
             let splittedTime = timeString.components(separatedBy: ":")
     
@@ -408,7 +414,7 @@ class PhoneVC: UIViewController, UICollectionViewDelegate, UICollectionViewDataS
             } else {
                 finalTime = splittedTime[0] + ":" + splittedTime[1]
             }
-            let finalDate = "2018" + "-" + String(describing: month) + "-" + splittedDate[1] + "T" + finalTime
+            let finalDate = "2018" + "-" + monthString + "-" + splittedDate[1] + "T" + finalTime + ":00"
             bookInstance.date = finalDate
             bookInstance.email = emailField.text!
             bookInstance.fname = firstNameField.text!
@@ -417,6 +423,7 @@ class PhoneVC: UIViewController, UICollectionViewDelegate, UICollectionViewDataS
             bookInstance.number = numberField.text!
             //bookInstance.branchName = selectedBranch
             bookInstance.bookingType = 1
+            bookInstance.comment = commentField.text
             bookInstance.reason = mortgageField.text!
             //bookInstance.modifiedDate = branch.first!.modifiedDate
             RealmService.writeIntoRealm(object: bookInstance)

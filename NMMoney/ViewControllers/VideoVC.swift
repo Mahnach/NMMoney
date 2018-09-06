@@ -13,7 +13,8 @@ import RealmSwift
 class VideoVC: UIViewController, UICollectionViewDelegate, UICollectionViewDataSource {
 
     
-
+    @IBOutlet weak var commentField: UITextField!
+    
     @IBOutlet weak var dateLabel: UILabel!
     @IBOutlet weak var timeLabel: UILabel!
     @IBOutlet weak var emailField: UITextField!
@@ -380,7 +381,12 @@ class VideoVC: UIViewController, UICollectionViewDelegate, UICollectionViewDataS
         
         let splittedDate = dateLabel.text!.components(separatedBy: " ")
         let month = monthToNumber(monthString: splittedDate[2])
-        
+        var monthString = ""
+        if month < 10 {
+            monthString = "0" + String(describing: month)
+        } else {
+            monthString = String(describing: month)
+        }
         let timeString = timeLabel.text!
         let splittedTime = timeString.components(separatedBy: ":")
             
@@ -391,7 +397,7 @@ class VideoVC: UIViewController, UICollectionViewDelegate, UICollectionViewDataS
         } else {
             finalTime = splittedTime[0] + ":" + splittedTime[1]
         }
-        let finalDate = "2018" + "-" + String(describing: month) + "-" + splittedDate[1] + "T" + finalTime
+        let finalDate = "2018" + "-" + monthString + "-" + splittedDate[1] + "T" + finalTime + ":00"
         bookInstance.date = finalDate
         bookInstance.email = emailField.text!
         bookInstance.fname = firstNameField.text!
@@ -403,6 +409,7 @@ class VideoVC: UIViewController, UICollectionViewDelegate, UICollectionViewDataS
         bookInstance.reason = mortgageField.text!
         bookInstance.bookingType = 2
         bookInstance.modifiedDate = branch.first!.modifiedDate
+        bookInstance.comment = commentField.text
         RealmService.writeIntoRealm(object: bookInstance)
             
         SaveBook.saveBook { (completion) in

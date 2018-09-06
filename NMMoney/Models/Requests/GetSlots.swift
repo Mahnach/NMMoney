@@ -13,7 +13,8 @@ import RealmSwift
 class GetSlots{
     
     static func getSlots(completion: @escaping (Bool) -> Void) {
-        
+        // testing - http://apidev.nmmoneybookings.co.uk/bms/appointment/list
+        //http://api.nmmoneybookings.co.uk/bms/appointment/list
         let url = "http://api.nmmoneybookings.co.uk/bms/appointment/list"
         
         
@@ -58,7 +59,7 @@ class GetSlots{
         }
         
         let headers: HTTPHeaders = [
-            "Content-Type": "application/x-www-form-urlencoded",
+            "Content-Type": "application/json",
             "X-AuthToken": RealmService.getToken().last!.token!
         ]
         
