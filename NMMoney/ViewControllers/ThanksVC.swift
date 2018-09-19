@@ -53,8 +53,17 @@ class ThanksVC: UIViewController {
         timeLabel.text = splittedDate?[1]
         finishBtn.roundCorners(.allCorners, radius: 12)
         
-        DispatchQueue.main.asyncAfter(deadline: .now() + 60) {
-            self.pushVC(identifier: "kStartVC")
+        DispatchQueue.main.asyncAfter(deadline: .now() + 5) {
+            if let wd = UIApplication.shared.delegate?.window {
+                var vc = wd!.rootViewController
+                if(vc is UINavigationController){
+                    vc = (vc as! UINavigationController).visibleViewController
+                    
+                }
+                if(vc is ThanksVC){
+                    self.pushVC(identifier: "kStartVC")
+                }
+            }
         }
         
         

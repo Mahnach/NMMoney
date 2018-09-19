@@ -12,12 +12,12 @@ import RealmSwift
 
 class GetSlots{
     
-    static func getSlots(completion: @escaping (Bool) -> Void) {
+    static func getSlots(completion: @escaping (Bool, [Singleton]) -> Void) -> [Singleton] {
         // testing - http://apidev.nmmoneybookings.co.uk/bms/appointment/list
         //http://api.nmmoneybookings.co.uk/bms/appointment/list
         let url = "http://api.nmmoneybookings.co.uk/bms/appointment/list"
         
-        
+        var arr = [Singleton]()
         let date = Date()
         let calendar = Calendar.current
         
@@ -80,7 +80,8 @@ class GetSlots{
                     let array = response.result.value as! Array<[String: Any]>
                     
                     for element in array {
-                        let instance = SlotsModel()
+                        
+                        let instance = Singleton()
                         instance.available = element["AppointmentAvailable"] as! Bool
                         var date = element["AppointmentDate"] as? String
                         var parsedDate = date?.components(separatedBy: "T")
@@ -93,12 +94,15 @@ class GetSlots{
                         instance.day = parsedDate![0].components(separatedBy: "-")[2]
                         instance.hours = parsedTime![1].components(separatedBy: ":")[0]
                         instance.minutes = parsedTime![1].components(separatedBy: ":")[1]
-                        RealmService.writeIntoRealm(object: instance)
+                        arr.append(instance)
+                        //RealmService.writeIntoRealm(object: instance)
                     }
+                    
+                    completion(true, arr)
 
-                    completion(true)
                 }
-                completion(false)
+                completion(false, arr)
         }
+        return arr
     }
 }

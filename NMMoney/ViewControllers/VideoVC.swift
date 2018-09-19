@@ -22,6 +22,7 @@ class VideoVC: UIViewController, UICollectionViewDelegate, UICollectionViewDataS
     @IBOutlet weak var lastNameField: UITextField!
     @IBOutlet weak var firstNameField: UITextField!
     
+    @IBOutlet weak var activity: UIActivityIndicatorView!
     @IBOutlet var buttonsTimeArray: [UIButton]!
     
     @IBOutlet weak var mortgageField: UITextField!
@@ -29,7 +30,7 @@ class VideoVC: UIViewController, UICollectionViewDelegate, UICollectionViewDataS
     @IBOutlet weak var dateCollectionView: UICollectionView!
     
     fileprivate var isKeyboardShow = false
- 
+    var dateArray = [Singleton]()
     @IBOutlet weak var checkBox: UIView!
     @IBOutlet weak var branchField: UITextField!
     @IBOutlet weak var booked: UIButton!
@@ -55,6 +56,7 @@ class VideoVC: UIViewController, UICollectionViewDelegate, UICollectionViewDataS
         hideKeyboardWhenTappedAround()
         timeLabel.isHidden = true
         view.addSubview(checkbox)
+        activity.transform = CGAffineTransform(scaleX: 2.5, y: 2.5)
         checkbox.addTarget(self, action: #selector(checkboxValueChanged(sender:)), for: .valueChanged)
         for element in self.buttonsTimeArray {
             element.isHidden = true
@@ -100,6 +102,7 @@ class VideoVC: UIViewController, UICollectionViewDelegate, UICollectionViewDataS
         self.numberField.delegate = self
         self.firstNameField.delegate = self
         self.lastNameField.delegate = self
+        self.commentField.delegate = self
     }
     
     
@@ -129,15 +132,14 @@ class VideoVC: UIViewController, UICollectionViewDelegate, UICollectionViewDataS
     }
 
     @IBAction func scrollToRight(_ sender: UIButton) {
-        if dateCollectionView.contentOffset.x >= 0 && dateCollectionView.contentOffset.x < 200  {
+        if dateCollectionView.contentOffset.x >= 0 && dateCollectionView.contentOffset.x < CGFloat(dateArray.count * 55 / 12)  {
             UIView.animate(withDuration: 0.5, delay: 0, options: UIViewAnimationOptions.curveEaseOut, animations: {
                 self.dateCollectionView.contentOffset.x += 100
                 print(self.dateCollectionView.contentOffset.x)
             }, completion: nil)
         } else {
-            self.dateCollectionView.contentOffset.x = 200
+            self.dateCollectionView.contentOffset.x = CGFloat(dateArray.count * 55 / 12)
         }
-
     }
     
     @IBAction func scrollToLeft(_ sender: UIButton) {
@@ -148,18 +150,17 @@ class VideoVC: UIViewController, UICollectionViewDelegate, UICollectionViewDataS
                 self.dateCollectionView.contentOffset.x -= 100
             }, completion: nil)
         }
-
     }
 
     func collectionView(_ collectionView: UICollectionView, numberOfItemsInSection section: Int) -> Int {
-        if RealmService.getSlotsModel().count == 0 {
+        if dateArray.count == 0 {
             return 0
         }
-        let remainder = RealmService.getSlotsModel().count % 12
+        let remainder = dateArray.count % 12
         if remainder > 0 {
-            return ((RealmService.getSlotsModel().count / 12) + 1)
+            return ((dateArray.count / 12) + 1)
         } else {
-            return (RealmService.getSlotsModel().count / 12)
+            return (dateArray.count / 12)
         }
         
     }
@@ -181,23 +182,23 @@ class VideoVC: UIViewController, UICollectionViewDelegate, UICollectionViewDataS
             let d = String(describing: day) //RealmService.getBranchTime().last!.day!
             let dateString = y + "-" + m + "-" + d
             let day = Date().allDates(till: date, startDate: dateString)
-            let remainder = RealmService.getSlotsModel().count % 12
+            let remainder = dateArray.count % 12
 
             if remainder != 0 {
                 if indexPath.row == 0 {
-                    cell.day.text = RealmService.getSlotsModel()[0].day!
-                    cell.month.text = monthToString(month: RealmService.getSlotsModel()[0].month!)
-                    cell.dayWeek.text = String(RealmService.getSlotsModel()[0].weekDay!.prefix(3))
+                    cell.day.text = dateArray[0].day!
+                    cell.month.text = monthToString(month: dateArray[0].month!)
+                    cell.dayWeek.text = String(dateArray[0].weekDay!.prefix(3))
                 }
                 else {
-                    cell.day.text = RealmService.getSlotsModel()[remainder + (indexPath.row - 1) * 12].day!
-                    cell.month.text = monthToString(month: RealmService.getSlotsModel()[remainder + (indexPath.row - 1) * 12].month!)
-                    cell.dayWeek.text = String(RealmService.getSlotsModel()[remainder + (indexPath.row - 1) * 12].weekDay!.prefix(3))
+                    cell.day.text = dateArray[remainder + (indexPath.row - 1) * 12].day!
+                    cell.month.text = monthToString(month: dateArray[remainder + (indexPath.row - 1) * 12].month!)
+                    cell.dayWeek.text = String(dateArray[remainder + (indexPath.row - 1) * 12].weekDay!.prefix(3))
                     }
             } else {
-                cell.day.text = RealmService.getSlotsModel()[indexPath.row * 12].day!
-                cell.month.text = monthToString(month: RealmService.getSlotsModel()[indexPath.row * 12].month!)
-                cell.dayWeek.text = String(RealmService.getSlotsModel()[indexPath.row * 12].weekDay!.prefix(3))
+                cell.day.text = dateArray[indexPath.row * 12].day!
+                cell.month.text = monthToString(month: dateArray[indexPath.row * 12].month!)
+                cell.dayWeek.text = String(dateArray[indexPath.row * 12].weekDay!.prefix(3))
             }
 
 //            cell.day.text = day[indexPath.row].dayOfDate()
@@ -213,20 +214,19 @@ class VideoVC: UIViewController, UICollectionViewDelegate, UICollectionViewDataS
     func collectionView(_ collectionView: UICollectionView, didSelectItemAt indexPath: IndexPath) {
 
         timeLabel.text = ""
-        
-        
+
         for element in buttonsTimeArray {
             element.isHidden = true
             element.backgroundColor = UIColor.white
             element.setTitleColor(UIColor.black, for: .normal)
         }
-        let remainder = RealmService.getSlotsModel().count % 12
+        let remainder = dateArray.count % 12
         if remainder != 0 {
             if indexPath.row == 0 {
                 var arr = [Int]()
                 arr.removeAll()
                 for i in 0..<remainder {
-                    arr.append(Int(RealmService.getSlotsModel()[i].hours!)!)
+                    arr.append(Int(dateArray[i].hours!)!)
                 }
                 for element in arr {
                     for btn in buttonsTimeArray {
@@ -241,9 +241,9 @@ class VideoVC: UIViewController, UICollectionViewDelegate, UICollectionViewDataS
                 let start = remainder + (indexPath.row - 1) * 12
                 let finish = remainder + (indexPath.row) * 12
                 for i in start..<finish {
-                    arr.append(Int(RealmService.getSlotsModel()[i].hours!)!)
+                    arr.append(Int(dateArray[i].hours!)!)
                 }
-                
+
                 for element in arr {
                     for btn in buttonsTimeArray {
                         if element == btn.tag {
@@ -259,32 +259,57 @@ class VideoVC: UIViewController, UICollectionViewDelegate, UICollectionViewDataS
         }
     
         var indexes = [Int]()
-        for i in 0..<RealmService.getSlotsModel().count {
-            if !RealmService.getSlotsModel()[i].available {
+        for i in 0..<dateArray.count {
+            if !dateArray[i].available {
                 indexes.append(i)
             }
         }
 
+        guard let cell = collectionView.cellForItem(at: indexPath) as? DateCollectionCell else { return }
+        
+        
         for index in indexes {
-            if index >= remainder {
-                let page = (index - remainder) / 12
-                if page == indexPath.row {
-                    if index <= 12 {
-                        buttonsTimeArray[index].isHidden = true
-                    } else {
-                        buttonsTimeArray[index % 12].isHidden = true
+            if indexPath.row == 0 {
+                if index < remainder {
+                    for btn in buttonsTimeArray {
+                        if btn.tag == Int(dateArray[index].hours!)! {
+                            btn.isHidden = true
+                        }
                     }
                 }
-            } else {
-                if indexPath.row == 0 {
-                    buttonsTimeArray[index].isHidden = true
+            }
+            if indexPath.row > 0 {
+                if dateArray[index].day == cell.day.text {
+                    for btn in buttonsTimeArray {
+                        if btn.tag == Int(dateArray[index].hours!)! {
+                            btn.isHidden = true
+                        }
+                    }
                 }
             }
-            
         }
+        
+        
+//        for index in indexes {
+//            if index >= remainder {
+//                let page = (index - remainder) / 12
+//                if page == indexPath.row {
+//                    if index <= 12 {
+//                        buttonsTimeArray[index].isHidden = true
+//                    } else {
+//                        buttonsTimeArray[index % 12].isHidden = true
+//                    }
+//                }
+//            } else {
+//                if indexPath.row == 0 {
+//                    buttonsTimeArray[index].isHidden = true
+//                }
+//            }
+//
+//        }
             print(indexes)
         
-        guard let cell = collectionView.cellForItem(at: indexPath) as? DateCollectionCell else { return }
+
         cell.layer.borderWidth = 0
         cell.day.textColor = UIColor.red
         selectedDate = cell.dayWeek.text! + " " + cell.day.text! + " " + cell.month.text!
@@ -457,8 +482,10 @@ class VideoVC: UIViewController, UICollectionViewDelegate, UICollectionViewDataS
     }
     
     func getSlots() {
-        GetSlots.getSlots { (completion) in
+        GetSlots.getSlots { (completion, arr) in
             if completion {
+                self.dateArray.removeAll()
+                self.dateArray = arr
                 self.dateCollectionView.reloadData()
             }
         }
@@ -581,6 +608,12 @@ extension VideoVC: UITextFieldDelegate {
             }
             isKeyboardShow = true
         }
+        if (textField == self.commentField && !isKeyboardShow) {
+            UIView.animate(withDuration: 0.3) { [weak self] in
+                self?.view.frame.origin.y -= 350
+            }
+            isKeyboardShow = true
+        }
     }
     
     func textFieldDidEndEditing(_ textField: UITextField) {
@@ -591,6 +624,12 @@ extension VideoVC: UITextFieldDelegate {
             isKeyboardShow {
             UIView.animate(withDuration: 0.3) { [weak self] in
                 self?.view.frame.origin.y += 150
+            }
+            isKeyboardShow = false
+        }
+        if (textField == self.commentField && isKeyboardShow) {
+            UIView.animate(withDuration: 0.3) { [weak self] in
+                self?.view.frame.origin.y += 350
             }
             isKeyboardShow = false
         }
